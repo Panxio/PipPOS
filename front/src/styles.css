@@ -1,0 +1,150 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-vivo: var(--vivo);
+}
+
+/* Tokens de la landing Claro por defecto; oscuro con data-theme. */
+:root {
+  --bg: #f2f5f3;
+  --fg: #0a2530;
+  --surface: #ffffff;
+  --border: #c4d3d0;
+  --accent: #0f3a46;
+  --vivo: #f2a93b;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0a2530;
+  --fg: #e8f1ee;
+  --surface: #0f3a46;
+  --border: #2b5560;
+  --accent: #f2a93b;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 400;
+}
+
+/* Cifras: IBM Plex Mono con dígitos tabulares. */
+.cifra {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 3px solid var(--vivo);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Tablas (U4): encabezados en mayúsculas, cifras tabulares y resalte de fila al pasar el ratón (sin transición). */
+/* La tabla de ejemplo de la landing (.landing-tabla) conserva su propio estilo: no entra en estas reglas. */
+table:not(.landing-tabla) th {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+table:not(.landing-tabla) td {
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--border);
+}
+
+table:not(.landing-tabla) tbody tr:hover {
+  background-color: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+/* Login (U3): siempre oscuro, con la paleta de la landing fija, sin depender de data-theme. */
+.login-page {
+  --color-bg: #0a2530;
+  --color-fg: #e8f1ee;
+  --color-surface: #0f3a46;
+  --color-border: #2b5560;
+  --color-accent: #f2a93b;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 16px;
+  overflow: hidden;
+  background: #0a2530;
+  color: #e8f1ee;
+}
+
+/* Ondas decorativas: no reciben eventos, no son interactivas y quedan detrás del formulario. */
+.login-waves {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.login-waves > span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120vmax;
+  height: 120vmax;
+  margin: -60vmax 0 0 -60vmax;
+  border: 1.5px solid rgb(143 211 207 / 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  animation: landing-onda 9s linear infinite;
+}
+
+.login-waves > span:nth-child(2) {
+  animation-delay: 2.25s;
+}
+
+.login-waves > span:nth-child(3) {
+  animation-delay: 4.5s;
+}
+
+.login-waves > span:nth-child(4) {
+  animation-delay: 6.75s;
+}
+
+@keyframes landing-onda {
+  0% {
+    transform: scale(0.02);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Movimiento reducido (A4): se apaga toda animación y transición de la app. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .login-waves > span:first-child {
+    opacity: 0.5;
+    transform: scale(0.35);
+  }
+}

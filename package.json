@@ -1,0 +1,23 @@
+{
+  "name": "pippos",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Portal backoffice de terminales POS (demo local para practicar automatización)",
+  "workspaces": [
+    "api",
+    "front",
+    "shared"
+  ],
+  "scripts": {
+    "test": "npm test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

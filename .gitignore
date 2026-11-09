@@ -1,0 +1,11 @@
+# deps
+node_modules/
+target/
+dist/
+# graphify (memoria de grafo: cost es local)
+graphify-out/cost.json
+# logs de sub-agentes y permisos locales (regenerables / personales)
+# os
+.DS_Store
+# base SQLite local de la demo (regenerable con el sembrado)
+data/
