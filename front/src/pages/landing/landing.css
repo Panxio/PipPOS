@@ -1,0 +1,838 @@
+/* Landing (ruta /). Paleta y tipografía del prototipo aprobado, acotadas a .landing: no tocan los tokens de la app.
+   Contrato de automatización: la animación es solo decoración (fondos de panel y ondas; nunca botones, enlaces ni la tabla)
+   y prefers-reduced-motion apaga toda animación y transición de la landing. */
+
+.landing {
+  --abyss: #0a2530;
+  --deep: #0f3a46;
+  --foam: #dceae5;
+  --paper: #f2f5f3;
+  --amber: #f2a93b;
+  --on-dark: #e8f1ee;
+  --muted-dark: #a9c3c4;
+  --muted-light: #3e5c61;
+  --inset: clamp(12px, 4vw, 56px);
+  --radius: 32px;
+  --display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  position: relative;
+  min-height: 100vh;
+  background: var(--abyss);
+  color: var(--on-dark);
+  font: 400 1.0625rem/1.6 var(--display);
+}
+
+.landing [hidden] {
+  display: none !important;
+}
+
+.landing :focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+}
+
+/* Las anclas no quedan tapadas por la barra fija. */
+.landing [id] {
+  scroll-margin-top: 80px;
+}
+
+.landing-skip {
+  position: absolute;
+  left: 12px;
+  top: -64px;
+  z-index: 20;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--amber);
+  color: var(--abyss);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.landing-skip:focus {
+  top: 12px;
+}
+
+/* ---------- barra superior ---------- */
+
+.landing-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgb(10 37 48 / 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgb(232 241 238 / 0.12);
+}
+
+.landing-bar-in {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px 28px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 12px 24px;
+}
+
+.landing-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.landing-brand svg {
+  width: 26px;
+  height: 26px;
+  color: var(--amber);
+}
+
+.landing-menus {
+  display: flex;
+  gap: 4px;
+  margin-right: auto;
+}
+
+.landing-menu {
+  position: relative;
+}
+
+.landing-menu-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--on-dark);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.landing-menu-boton:hover,
+.landing-menu-boton[aria-expanded='true'] {
+  background: rgb(232 241 238 / 0.1);
+}
+
+.landing-menu-boton svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s;
+}
+
+.landing-menu-boton[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.landing-drop {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 30;
+  min-width: 280px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border-radius: 16px;
+  background: var(--paper);
+  color: var(--abyss);
+  box-shadow: 0 24px 48px -12px rgb(0 0 0 / 0.5);
+}
+
+.landing-drop a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.landing-drop a:hover {
+  background: var(--foam);
+}
+
+.landing-drop strong {
+  display: block;
+  font-weight: 600;
+}
+
+.landing-drop span {
+  display: block;
+  color: var(--muted-light);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.landing-lang {
+  padding: 6px 12px;
+  border: 1px solid rgb(232 241 238 / 0.3);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--on-dark);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.landing-lang option {
+  color: var(--abyss);
+}
+
+.landing-btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.landing-btn-principal {
+  background: var(--amber);
+  color: var(--abyss);
+}
+
+.landing-btn-principal:hover {
+  background: #f7bc63;
+}
+
+.landing-btn-fantasma {
+  border-color: rgb(232 241 238 / 0.4);
+  color: var(--on-dark);
+}
+
+.landing-btn-fantasma:hover {
+  border-color: var(--on-dark);
+}
+
+.landing-bar .landing-btn {
+  padding: 8px 18px;
+  font-size: 0.95rem;
+}
+
+.landing-menu-toggle {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid rgb(232 241 238 / 0.3);
+  border-radius: 8px;
+  background: none;
+  color: var(--on-dark);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Panel bajo el botón «Menú», alineado a la derecha como los desplegables de escritorio. */
+.landing-mobile-nav {
+  position: absolute;
+  top: 56px;
+  right: 16px;
+  z-index: 30;
+  display: grid;
+  gap: 2px;
+  min-width: 220px;
+  max-width: calc(100vw - 32px);
+  padding: 8px;
+  border-radius: 16px;
+  background: var(--paper);
+  color: var(--abyss);
+  box-shadow: 0 24px 48px -12px rgb(0 0 0 / 0.5);
+}
+
+.landing-mobile-nav a {
+  padding: 12px;
+  border-radius: 10px;
+  color: var(--abyss);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.landing-mobile-nav a:hover {
+  background: var(--foam);
+}
+
+/* ---------- hero ---------- */
+
+.landing-hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: calc(100svh - 58px);
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 78% 50%, var(--deep), var(--abyss) 62%);
+}
+
+/* Ondas decorativas: no reciben eventos y no tapan nada interactivo. */
+.landing .rings {
+  position: absolute;
+  top: 50%;
+  right: 22%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.landing .rings i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 120vmax;
+  height: 120vmax;
+  margin: -60vmax 0 0 -60vmax;
+  border: 1.5px solid rgb(143 211 207 / 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  animation: landing-onda 9s linear infinite;
+}
+
+.landing .rings i:nth-child(2) {
+  animation-delay: 2.25s;
+}
+
+.landing .rings i:nth-child(3) {
+  animation-delay: 4.5s;
+}
+
+.landing .rings i:nth-child(4) {
+  animation-delay: 6.75s;
+}
+
+/* @keyframes landing-onda: en styles.css (común con el login). */
+
+.landing-hero-in {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 48px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 56px 24px;
+}
+
+.landing-hero h1 {
+  max-width: 14ch;
+  font-size: clamp(2.5rem, 5.6vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.landing-lead {
+  max-width: 46ch;
+  margin-top: 24px;
+  color: var(--muted-dark);
+  font-size: 1.1875rem;
+}
+
+.landing-cta-fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+/* ---------- comprobante de adorno ---------- */
+
+.landing-recibo-caja {
+  display: flex;
+  justify-content: center;
+}
+
+.landing-recibo {
+  width: min(100%, 300px);
+  margin: 0;
+  padding: 26px 24px 40px;
+  background: #fbfbf8;
+  color: #18242a;
+  font: 400 0.8125rem/1.7 var(--mono);
+  transform: rotate(2.2deg);
+  box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.6);
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 16px 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 16px 100%;
+  animation: landing-imprime 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+}
+
+@keyframes landing-imprime {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(-60px) rotate(2.2deg);
+  }
+  to {
+    clip-path: inset(0);
+    transform: rotate(2.2deg);
+  }
+}
+
+.landing-recibo-titulo {
+  font: 500 0.9375rem var(--mono);
+  text-align: center;
+}
+
+.landing-recibo-datos {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0 12px;
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px dashed #8a9a9f;
+}
+
+.landing-recibo-datos dt {
+  color: #52666b;
+}
+
+.landing-recibo-datos dd {
+  margin: 0;
+  text-align: right;
+}
+
+.landing-recibo-total {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.landing-recibo-ok {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #8a9a9f;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.landing-recibo small {
+  display: block;
+  margin-top: 8px;
+  color: #52666b;
+  font-size: 0.6875rem;
+  text-align: center;
+}
+
+/* ---------- paneles ---------- */
+
+.landing-panel {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(56px, 9vw, 120px) 0;
+}
+
+/* El fondo del panel es una capa detrás del contenido: el efecto de ancho nunca mueve botones, enlaces ni la tabla. */
+.landing-panel::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--fondo-panel);
+}
+
+.landing-panel-claro {
+  --fondo-panel: var(--foam);
+  color: var(--abyss);
+}
+
+.landing-panel-oscuro {
+  --fondo-panel: var(--deep);
+  color: var(--on-dark);
+}
+
+/* Estado de reposo de los paneles de ancho con inset (también sin soporte de animación). */
+.landing-panel-recogido::before {
+  left: var(--inset);
+  right: var(--inset);
+  border-radius: var(--radius);
+}
+
+.landing-separado {
+  margin-top: var(--inset);
+}
+
+/* Paneles con fondo animado: el contenido guarda al menos la distancia del inset al borde del fondo
+   (en el prototipo el contenido iba dentro del panel encogido; aquí el fondo es una capa aparte). */
+.landing-efecto-encoge > .landing-panel-in,
+.landing-efecto-crece > .landing-panel-in {
+  padding-inline: max(24px, calc(var(--inset) + 24px - max(0px, (100% - 1240px) / 2)));
+}
+
+.landing-panel-in {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.landing-dos-columnas {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 56px;
+}
+
+.landing-panel h2 {
+  max-width: 18ch;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+.landing-sub {
+  max-width: 52ch;
+  margin-top: 18px;
+}
+
+.landing-panel-claro .landing-sub {
+  color: var(--muted-light);
+}
+
+.landing-panel-oscuro .landing-sub {
+  color: var(--muted-dark);
+}
+
+/* Efecto de paneles: CSS puro y solo con soporte de animation-timeline. Sin él, los paneles quedan fijos y legibles. */
+@supports (animation-timeline: view()) {
+  .landing-efecto-encoge::before {
+    animation: landing-encoge linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  .landing-efecto-crece::before {
+    animation: landing-crece linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+}
+
+@keyframes landing-encoge {
+  from {
+    left: 0;
+    right: 0;
+    border-radius: 0;
+  }
+  to {
+    left: var(--inset);
+    right: var(--inset);
+    border-radius: var(--radius);
+  }
+}
+
+@keyframes landing-crece {
+  from {
+    left: var(--inset);
+    right: var(--inset);
+    border-radius: var(--radius);
+  }
+  to {
+    left: 0;
+    right: 0;
+    border-radius: 0;
+  }
+}
+
+/* Panel «cinco áreas» */
+
+.landing-areas {
+  display: grid;
+  margin: 36px 0 0;
+}
+
+.landing-areas > div {
+  padding: 16px 0;
+  border-top: 1px solid rgb(10 37 48 / 0.2);
+}
+
+.landing-areas dt {
+  font-size: 1.125rem;
+  font-weight: 800;
+}
+
+.landing-areas dd {
+  max-width: 40ch;
+  margin: 0;
+  color: var(--muted-light);
+}
+
+.landing-ventana {
+  container-type: inline-size;
+  padding: 20px;
+  border-radius: 18px;
+  background: var(--paper);
+  color: var(--abyss);
+  box-shadow: 0 30px 60px -30px rgb(10 37 48 / 0.5);
+}
+
+.landing-ventana-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.landing-ventana-cabecera h3 {
+  font-size: 1.0625rem;
+  font-weight: 800;
+}
+
+.landing-ventana-cabecera span {
+  color: var(--muted-light);
+  font-size: 0.8125rem;
+}
+
+.landing-tabla-wrap {
+  overflow-x: auto;
+}
+
+.landing-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.landing-tabla th,
+.landing-tabla td {
+  padding: 10px;
+  border-bottom: 1px solid rgb(10 37 48 / 0.12);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.landing-tabla th {
+  color: var(--muted-light);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.landing-tabla .landing-n {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.landing-pastilla {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.landing-pastilla-ok {
+  background: #bfe3d3;
+  color: #0d4a35;
+}
+
+.landing-pastilla-anulada {
+  background: #e3d3c6;
+  color: #5a3513;
+}
+
+.landing-pastilla-devuelta {
+  background: #d3d9ee;
+  color: #26336b;
+}
+
+/* Con la ventana estrecha se oculta la columna de método: la tabla no debe desplazarse (axe exige lo contrario). */
+@container (max-width: 439px) {
+  .landing-col-medio {
+    display: none;
+  }
+}
+
+/* Texto solo para lectores de pantalla (el título de la tabla). */
+.landing-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Panel oscuro de automatización */
+
+.landing-pares {
+  display: grid;
+  gap: 22px;
+  max-width: 68ch;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.landing-pares li {
+  display: grid;
+  gap: 2px;
+}
+
+.landing-pares strong {
+  font-size: 1.125rem;
+  font-weight: 800;
+}
+
+.landing-pares span {
+  color: var(--muted-dark);
+}
+
+.landing-codigo {
+  display: grid;
+  gap: 14px;
+}
+
+.landing-codigo figure {
+  margin: 0;
+}
+
+.landing-codigo figcaption {
+  margin-bottom: 6px;
+  color: var(--muted-dark);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.landing-codigo pre {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--abyss);
+  color: #cfe6e1;
+  font: 400 0.8125rem/1.6 var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Cierre */
+
+.landing-nota {
+  margin-top: 18px;
+  color: var(--muted-light);
+  font-size: 0.9375rem;
+}
+
+/* ---------- pie ---------- */
+
+.landing-footer {
+  padding: 36px 24px 48px;
+  color: var(--muted-dark);
+  font-size: 0.9375rem;
+  text-align: center;
+}
+
+.landing-footer a {
+  margin-inline: 10px;
+}
+
+/* ---------- responsive: escritorio desde 860 px, menú móvil por debajo ---------- */
+
+@media (max-width: 859.98px) {
+  .landing-menus {
+    display: none;
+  }
+
+  .landing-bar-in {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+  }
+
+  .landing-brand {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .landing-menu-toggle {
+    display: inline-block;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .landing-lang {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+  }
+
+  .landing-bar .landing-btn {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  .landing-hero-in,
+  .landing-dos-columnas {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .landing .rings {
+    top: 72%;
+    right: 50%;
+  }
+
+  .landing-recibo-caja {
+    order: 2;
+  }
+
+  .landing-col-medio {
+    display: none;
+  }
+
+  .landing-ventana {
+    padding: 12px;
+  }
+
+  .landing-tabla {
+    font-size: 0.8125rem;
+  }
+
+  .landing-tabla th,
+  .landing-tabla td {
+    padding: 10px 6px;
+    white-space: normal;
+  }
+
+  .landing-pastilla {
+    padding: 2px 8px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 860px) {
+  .landing-mobile-nav {
+    display: none !important;
+  }
+}
+
+/* ---------- movimiento reducido: se apaga toda animación y transición de la landing ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .landing *,
+  .landing *::before,
+  .landing *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .landing .rings i:first-child {
+    opacity: 0.5;
+    transform: scale(0.35);
+  }
+}
