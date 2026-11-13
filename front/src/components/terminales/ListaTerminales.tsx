@@ -24,7 +24,7 @@ export default function ListaTerminales({ pagina, error, onAbrir, onIrAPagina }:
           {t(`error.${error}` as const)}
         </p>
       )}
-      {error === null && pagina === null && <p>{t('terminals.loading')}</p>}
+      {error === null && pagina === null && <p role="status" aria-busy="true" data-testid={TESTIDS['terminals-loading']}>{t('terminals.loading')}</p>}
       {pagina !== null && pagina.items.length === 0 && (
         <p data-testid={TESTIDS['terminals-empty']}>{t('terminals.empty')}</p>
       )}

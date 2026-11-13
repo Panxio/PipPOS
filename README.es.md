@@ -48,7 +48,7 @@ npm test                # api, shared y front (Vitest)
 npm run typecheck
 ```
 
-Medido de nuevo el 2026-11-09: API 795, shared 26 y front 248 pruebas unitarias y de integración, todas en verde.
+Medido de nuevo el 2026-11-13: API 851, shared 26 y front 255 pruebas unitarias y de integración, todas en verde.
 
 ## Pruebas de seguridad
 

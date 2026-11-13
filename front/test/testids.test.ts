@@ -4,7 +4,7 @@ import { TESTIDS } from '../src/testids';
 
 const TERMINALES = [
   'terminals-page', 'terminals-search', 'terminals-status-filter', 'terminals-sort', 'terminals-order', 'terminals-table',
-  'terminals-empty', 'terminals-error', 'terminals-total', 'terminals-page-info', 'terminals-prev', 'terminals-next',
+  'terminals-empty', 'terminals-error', 'terminals-loading', 'terminals-total', 'terminals-page-info', 'terminals-prev', 'terminals-next',
   'terminal-new-button', 'terminal-form', 'terminal-form-submit', 'terminal-form-cancel', 'terminal-form-error',
   ...['serial', 'alias', 'model', 'branch', 'till'].map((c) => `terminal-field-${c}`),
   ...['button', 'form', 'alias', 'branch', 'till', 'submit', 'cancel', 'error'].map((c) => `terminal-edit-${c}`),
@@ -15,7 +15,7 @@ const TERMINALES = [
 ];
 
 const USUARIOS = [
-  'users-page', 'users-table', 'users-error', 'users-action-error', 'user-confirm', 'user-confirm-accept', 'user-confirm-cancel',
+  'users-page', 'users-table', 'users-error', 'users-loading', 'branches-loading', 'mailbox-loading', 'users-action-error', 'user-confirm', 'user-confirm-accept', 'user-confirm-cancel',
   'user-new-button', 'user-wizard', 'wizard-step-data', 'wizard-step-role', 'wizard-step-summary', 'wizard-name', 'wizard-email',
   'wizard-role', 'wizard-branch', 'wizard-next', 'wizard-back', 'wizard-submit', 'wizard-cancel', 'wizard-error',
   ...['name', 'email', 'role', 'branch'].map((c) => `wizard-summary-${c}`),
@@ -29,7 +29,7 @@ const USUARIOS = [
 const COBRO = [
   'transactions-page', 'charge-form', 'charge-terminal', 'charge-amount', 'charge-method', 'charge-brand', 'charge-last4', 'charge-submit',
   'charge-error', 'charge-new', ...['status', 'folio', 'code', 'auth'].map((c) => `charge-result-${c}`), 'charge-result',
-  'tx-table', 'tx-empty', 'tx-error', 'tx-total', 'tx-page-info', 'tx-prev', 'tx-next',
+  'tx-table', 'tx-empty', 'tx-error', 'tx-loading', 'tx-total', 'tx-page-info', 'tx-prev', 'tx-next',
   ...['status', 'method', 'brand', 'terminal', 'from', 'to', 'min', 'max'].map((c) => `tx-filter-${c}`),
   'tx-detail', 'tx-detail-close', 'tx-detail-error', 'tx-event', 'tx-receipt-link',
   ...['folio', 'status', 'terminal', 'amount', 'refunded', 'method', 'brand', 'last4', 'auth'].map((c) => `tx-detail-${c}`),
@@ -46,11 +46,11 @@ const REPORTES = [
 ];
 
 const ALERTAS = [
-  'alerts-bell', 'alerts-badge', 'alerts-panel', 'alerts-panel-empty', 'alerts-panel-error', 'alerts-read-all', 'alerts-view-all',
-  'alerts-page', 'alerts-tab-alerts', 'alerts-tab-thresholds', 'alerts-tab-audit', 'alerts-unread-only', 'alerts-empty', 'alerts-error',
+  'alerts-bell', 'alerts-badge', 'alerts-panel', 'alerts-panel-empty', 'alerts-panel-error', 'alerts-panel-loading', 'alerts-read-all', 'alerts-view-all',
+  'alerts-page', 'alerts-tab-alerts', 'alerts-tab-thresholds', 'alerts-tab-audit', 'alerts-unread-only', 'alerts-empty', 'alerts-error', 'alerts-loading',
   'alerts-action-error',
   'alert-battery', 'alert-void-amount', 'alert-settings-save', 'alert-settings-saved', 'alert-settings-error',
-  'audit-action', 'audit-actor', 'audit-from', 'audit-to', 'audit-range-error', 'audit-table', 'audit-empty', 'audit-error', 'audit-total',
+  'audit-action', 'audit-actor', 'audit-from', 'audit-to', 'audit-range-error', 'audit-table', 'audit-empty', 'audit-error', 'audit-loading', 'audit-total',
   'audit-page-info', 'audit-prev', 'audit-next', 'audit-export', 'audit-export-error',
 ];
 

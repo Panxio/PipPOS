@@ -27,7 +27,7 @@ export default function ListaTransacciones({ pagina, error, aliases, onAbrir, on
           {t(`error.${error}` as const)}
         </p>
       )}
-      {error === null && pagina === null && <p>{t('tx.loading')}</p>}
+      {error === null && pagina === null && <p role="status" aria-busy="true" data-testid={TESTIDS['tx-loading']}>{t('tx.loading')}</p>}
       {pagina !== null && pagina.items.length === 0 && <p data-testid={TESTIDS['tx-empty']}>{t('tx.empty')}</p>}
       {pagina !== null && pagina.items.length > 0 && (
         <TablaTransacciones items={pagina.items} aliases={aliases} onAbrir={onAbrir} />

@@ -12,7 +12,6 @@ const METODOS_POR_ALCANCE: Readonly<Record<ApiKeyScope, readonly string[]>> = {
 
 // Folio positivo y canónico: sin ceros a la izquierda, sin signo, sin decimales.
 const FOLIO_DECIMAL = /^[1-9][0-9]{0,15}$/;
-const TEXTO_BASE64URL = /^[A-Za-z0-9_-]+$/;
 
 export function formatoLlave(token: string): string {
   return `${PREFIJO_LLAVE}${token}`;
@@ -32,13 +31,13 @@ export function codificarCursor(folio: number): string {
 }
 
 // Devuelve el folio, o null si el texto no es un cursor canónico (no basta con que decodifique).
+// Un cursor válido solo tiene letras y dígitos (los folios son dígitos: su base64 nunca usa «+», «/», «-» ni «_»),
+// así que no hace falta mapear base64url: cualquier otro carácter hace fallar a atob o a la re-codificación final.
+// `atob` acepta el texto sin relleno y descarta bits sobrantes; por eso se compara con la codificación canónica.
 export function decodificarCursor(texto: string): number | null {
-  if (!TEXTO_BASE64URL.test(texto) || texto.length % 4 === 1) return null;
-  const estandar = texto.replace(/-/g, '+').replace(/_/g, '/');
-  const conRelleno = estandar + '='.repeat((4 - (estandar.length % 4)) % 4);
   let decimal: string;
   try {
-    decimal = atob(conRelleno);
+    decimal = atob(texto);
   } catch {
     return null;
   }

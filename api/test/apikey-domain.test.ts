@@ -1,3 +1,4 @@
+import type { ApiKeyScope } from '@pippos/shared';
 import { describe, expect, it } from 'vitest';
 import { alcancePermite, codificarCursor, decodificarCursor, formatoLlave, prefijoDe } from '../src/domain/apikey';
 
@@ -15,6 +16,9 @@ describe('alcancePermite (K3)', () => {
     expect(alcancePermite('read', 'POST')).toBe(false);
     expect(alcancePermite('write', 'GET')).toBe(true);
     expect(alcancePermite('write', 'POST')).toBe(true);
+  });
+  it('un alcance desconocido (dato corrupto) no permite nada', () => {
+    expect(alcancePermite('admin' as ApiKeyScope, 'GET')).toBe(false);
   });
   it('PUT, PATCH y DELETE no los permite ningún alcance', () => {
     for (const m of ['PUT', 'PATCH', 'DELETE']) {
@@ -40,5 +44,13 @@ describe('cursor (K5)', () => {
     for (const mal of ['', '!!!', 'N Q', 'NQ==', b64('0'), b64('-1'), b64('1.5'), b64('abc'), b64('05'), b64(' 5'), b64('5 '), b64('1e3'), b64('9007199254740993'), b64('')]) {
       expect(decodificarCursor(mal), JSON.stringify(mal)).toBeNull();
     }
+  });
+  it('no basta con que decodifique: bits sobrantes, tamaño inseguro y longitud imposible dan null', () => {
+    expect(decodificarCursor('NR')).toBeNull(); // decodifica a «5» pero la forma canónica es «NQ»
+    expect(decodificarCursor('MTIy' + 'A')).toBeNull();
+    for (const mal of ['N', 'NQNQN']) expect(decodificarCursor(mal), mal).toBeNull(); // longitud ≡ 1 (mod 4)
+    const b64 = (s: string) => Buffer.from(s).toString('base64url');
+    expect(decodificarCursor(b64('9007199254740991'))).toBe(Number.MAX_SAFE_INTEGER);
+    expect(decodificarCursor(b64('9007199254740992')), '2^53 re-codifica igual pero no es seguro').toBeNull();
   });
 });

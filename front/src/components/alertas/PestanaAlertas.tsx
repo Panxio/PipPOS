@@ -66,7 +66,7 @@ export default function PestanaAlertas({ version, onCambio }: Props) {
           {t(`error.${error}` as const)}
         </p>
       )}
-      {error === null && lista === null && <p>{t('alerts.loading')}</p>}
+      {error === null && lista === null && <p role="status" aria-busy="true" data-testid={TESTIDS['alerts-loading']}>{t('alerts.loading')}</p>}
       {error === null && lista !== null && lista.items.length === 0 && (
         <p data-testid={TESTIDS['alerts-empty']}>{t('alerts.empty')}</p>
       )}

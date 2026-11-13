@@ -65,7 +65,7 @@ export default function ListaUsuarios({
           {t(`error.${error}` as const)}
         </p>
       )}
-      {error === null && usuarios === null && <p>{t('users.loading')}</p>}
+      {error === null && usuarios === null && <p role="status" aria-busy="true" data-testid={TESTIDS['users-loading']}>{t('users.loading')}</p>}
       {usuarios !== null && (
         <div className="overflow-x-auto">
           <table data-testid={TESTIDS['users-table']} className="w-full border-collapse text-left text-sm">

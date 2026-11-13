@@ -132,7 +132,7 @@ export default function PestanaAuditoria() {
           {t(`error.${error}` as const)}
         </p>
       )}
-      {error === null && resultado === null && <p>{t('audit.loading')}</p>}
+      {error === null && resultado === null && <p role="status" aria-busy="true" data-testid={TESTIDS['audit-loading']}>{t('audit.loading')}</p>}
       {resultado !== null && resultado.items.length === 0 && <p data-testid={TESTIDS['audit-empty']}>{t('audit.empty')}</p>}
       {resultado !== null && resultado.items.length > 0 && <TablaAuditoria items={resultado.items} />}
       <nav aria-label={t('pagination.label')} className="flex flex-wrap items-center gap-3 text-sm">

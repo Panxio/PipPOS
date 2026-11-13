@@ -18,7 +18,7 @@ export default function Bandeja({ mensajes, error }: Props) {
           {t(`error.${error}` as const)}
         </p>
       )}
-      {error === null && mensajes === null && <p>{t('users.loading')}</p>}
+      {error === null && mensajes === null && <p role="status" aria-busy="true" data-testid={TESTIDS['mailbox-loading']}>{t('users.loading')}</p>}
       {mensajes !== null && mensajes.length === 0 && <p data-testid={TESTIDS['mailbox-empty']}>{t('mailbox.empty')}</p>}
       {mensajes !== null && mensajes.length > 0 && (
         <ul className="flex flex-col gap-2 text-sm">

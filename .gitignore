@@ -9,3 +9,6 @@ graphify-out/cost.json
 .DS_Store
 # base SQLite local de la demo (regenerable con el sembrado)
 data/
+
+# Stryker
+api/reports/

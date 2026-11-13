@@ -62,7 +62,7 @@ export default function SucursalesCajas({ sucursales, error, onCambiado }: Props
           {t(`error.${errorVisible}` as const)}
         </p>
       )}
-      {sucursales === null && error === null && <p>{t('users.loading')}</p>}
+      {sucursales === null && error === null && <p role="status" aria-busy="true" data-testid={TESTIDS['branches-loading']}>{t('users.loading')}</p>}
       {sucursales !== null && (
         <ul className="flex flex-col gap-3">
           {sucursales.map((sucursal) => (

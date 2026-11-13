@@ -102,7 +102,7 @@ function ContenidoPanel({ lista, error, errorAccion, onMarcar }: ContenidoProps)
           {t(`error.${mensaje}` as const)}
         </p>
       )}
-      {error === null && lista === null && <p>{t('alerts.loading')}</p>}
+      {error === null && lista === null && <p role="status" aria-busy="true" data-testid={TESTIDS['alerts-panel-loading']}>{t('alerts.loading')}</p>}
       {error === null && lista !== null && lista.items.length === 0 && (
         <p data-testid={TESTIDS['alerts-panel-empty']}>{t('alerts.panel.empty')}</p>
       )}
