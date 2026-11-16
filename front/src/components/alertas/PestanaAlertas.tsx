@@ -4,6 +4,7 @@ import { codigoDe, marcarAlertaLeida, obtenerAlertas } from '../../api/client';
 import { useI18n } from '../../i18n';
 import { TESTIDS, alertRow, alertRowRead } from '../../testids';
 import { textoDeAlerta } from './textos';
+import { formatoFechaHora } from '../../formato';
 
 const LIMITE_SECCION = 50;
 
@@ -86,7 +87,7 @@ export default function PestanaAlertas({ version, onCambio }: Props) {
             <tbody>
               {lista.items.map((alerta) => (
                 <tr key={alerta.id} data-testid={alertRow(alerta.id)} data-read={String(alerta.read)} className="border-b border-border">
-                  <td className="px-2 py-2">{new Date(alerta.createdAt).toLocaleString(lang)}</td>
+                  <td className="px-2 py-2">{formatoFechaHora(alerta.createdAt, lang)}</td>
                   <td className="px-2 py-2">
                     {textoDeAlerta(alerta, t)}
                     {alerta.resolvedAt !== null && <span className="ml-2 text-accent">{t('alerts.resolved')}</span>}

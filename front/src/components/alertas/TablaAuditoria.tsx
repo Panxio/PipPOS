@@ -1,6 +1,7 @@
 import type { AuditEntry } from '@pippos/shared';
 import { useI18n } from '../../i18n';
 import { TESTIDS, auditRow } from '../../testids';
+import { formatoFechaHora } from '../../formato';
 
 interface Props {
   items: readonly AuditEntry[];
@@ -23,7 +24,7 @@ export default function TablaAuditoria({ items }: Props) {
         <tbody>
           {items.map((entrada) => (
             <tr key={entrada.seq} data-testid={auditRow(entrada.seq)} className="border-b border-border">
-              <td className="px-2 py-2">{new Date(entrada.atMs).toLocaleString(lang)}</td>
+              <td className="px-2 py-2">{formatoFechaHora(entrada.atMs, lang)}</td>
               <td className="px-2 py-2">{entrada.actorName}</td>
               <td className="px-2 py-2">{t(`audit.action.${entrada.action}` as const)}</td>
               <td className="px-2 py-2">{entidadDe(entrada)}</td>

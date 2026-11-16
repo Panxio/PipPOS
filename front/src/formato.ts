@@ -25,3 +25,10 @@ export function formatoVariacion(actual: string, anterior: string): string {
   const magnitud = decimas > 0n ? decimas : -decimas;
   return `${signo}${magnitud / 10n},${magnitud % 10n} %`;
 }
+
+// Fecha y hora con todos los campos a dos dígitos: el texto mide lo mismo cualquier día, así las tablas no se corren.
+export function formatoFechaHora(valor: number | string, lang: string): string {
+  return new Date(valor).toLocaleString(lang, {
+    day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit',
+  });
+}

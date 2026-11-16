@@ -48,7 +48,7 @@ npm test                # api, shared and front (Vitest)
 npm run typecheck
 ```
 
-Re-measured on 2026-11-13: API 851, shared 26, front 255 unit/integration tests, all passing.
+Re-measured on 2026-11-15: API 851, shared 26, front 258 unit/integration tests, all passing.
 
 ## Security checks
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatoBp, formatoClp, formatoVariacion } from '../src/formato';
+import { formatoBp, formatoClp, formatoVariacion, formatoFechaHora } from '../src/formato';
 
 describe('F21 formatoClp (importes como texto, sin pasar por number)', () => {
   it('agrupa de a tres con punto y antepone $', () => {
@@ -47,5 +47,19 @@ describe('F35 formatoVariacion (BigInt, un decimal truncado hacia cero)', () => 
     expect(formatoVariacion('99999999999999999', '50000000000000000')).toBe('+99,9 %');
     expect(formatoVariacion('9007199254740993', '9007199254740992')).toBe('0,0 %');
     expect(formatoVariacion('18014398509481986', '9007199254740993')).toBe('+100,0 %');
+  });
+});
+
+describe('formatoFechaHora (ancho fijo: la tabla no se mueve según el día)', () => {
+  it('rellena con ceros día, mes y hora', () => {
+    expect(formatoFechaHora(new Date(2026, 0, 5, 9, 5, 0).getTime(), 'es')).toBe('05/01/2026, 09:05:00');
+  });
+  it('un día de un dígito y uno de dos miden lo mismo', () => {
+    const corto = formatoFechaHora(new Date(2026, 10, 8, 18, 20, 11).getTime(), 'es');
+    const largo = formatoFechaHora(new Date(2026, 10, 15, 19, 39, 9).getTime(), 'es');
+    expect(corto.length).toBe(largo.length);
+  });
+  it('acepta también una fecha ISO (alertas)', () => {
+    expect(formatoFechaHora('2026-11-08T18:20:11', 'es')).toBe('08/11/2026, 18:20:11');
   });
 });
